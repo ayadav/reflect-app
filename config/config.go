@@ -12,6 +12,7 @@ type Config struct {
 	Server      *serverConfig
 	Redis       *redisConfig
 	TimeTracker *timeTrackerConfig
+	LogEntries  *logEntriesConfig
 }
 
 var config Config
@@ -21,10 +22,12 @@ func init() {
 	serverConf := new(serverConfig)
 	redisConf := new(redisConfig)
 	timeTrackerConf := new(timeTrackerConfig)
+	logEntriesConf := new(logEntriesConfig)
 	env.Parse(dbConf)
 	env.Parse(serverConf)
 	env.Parse(redisConf)
 	env.Parse(timeTrackerConf)
+	env.Parse(logEntriesConf)
 
 	googleAppCredential := os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")
 	if len(googleAppCredential) == 0 {
@@ -39,12 +42,15 @@ func init() {
 	log.Println(redisConf)
 	log.Println("TimeTracker::")
 	log.Println(timeTrackerConf)
+	log.Println("LogEntries::")
+	log.Println(logEntriesConf)
 
 	config = Config{
 		DB:          dbConf,
 		Server:      serverConf,
 		Redis:       redisConf,
 		TimeTracker: timeTrackerConf,
+		LogEntries:  logEntriesConf,
 	}
 }
 
@@ -65,6 +71,10 @@ type serverConfig struct {
 
 type redisConfig struct {
 	Address string `env:"REDIS_ADDRESS"  envDefault:":6379"`
+}
+
+type logEntriesConfig struct {
+	LogEntriesToken string `env:"LOGENTRIES_TOKEN"  envDefault:"bd643435-f887-4fd4-a595-225ffc2aa268"`
 }
 
 type timeTrackerConfig struct {

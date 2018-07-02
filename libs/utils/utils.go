@@ -7,9 +7,25 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/bsphere/le_go"
 	"github.com/getsentry/raven-go"
 	"github.com/sirupsen/logrus"
+	"github.com/iReflect/reflect-app/config"
 )
+
+var logger *le_go.Logger
+
+func init() {
+	var err error
+	appConfig := config.GetConfig()
+	logger, err = le_go.Connect(appConfig.LogEntries.LogEntriesToken)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer logger.Close()
+}
 
 // ParseDateString parses a date string to time.Time
 func ParseDateString(date string) (*time.Time, error) {
@@ -37,6 +53,11 @@ func LogToSentry(err error) {
 	logrus.Error(err.Error())
 	// ToDo: Add extra info like release, etc
 	raven.CaptureError(err, nil)
+}
+
+// LogToLogEntries ...
+func LogToLogEntries(err error) {
+	logger.Println("LogEntries test log message")
 }
 
 // UIntInSlice ...

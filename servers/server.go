@@ -26,6 +26,8 @@ import (
 	apiControllers "github.com/iReflect/reflect-app/controllers/v1"
 	"github.com/iReflect/reflect-app/db"
 	dbMiddlewares "github.com/iReflect/reflect-app/db/middlewares"
+	"github.com/iReflect/reflect-app/libs/utils"
+	"github.com/pkg/errors"
 )
 
 // App ...
@@ -152,6 +154,8 @@ func (a *App) SetRoutes() {
 	taskTrackerService := taskTrackerServices.TaskTrackerService{}
 	taskTrackerController := apiControllers.TaskTrackerController{TaskTrackerService: taskTrackerService}
 	taskTrackerController.Routes(v1.Group("task-tracker"))
+
+	utils.LogToLogEntries(errors.New("Helooooooooo"))
 }
 
 // SetAdminRoutes ...

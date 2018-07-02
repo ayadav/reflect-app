@@ -26,6 +26,12 @@
   version = "v1.2"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/bsphere/le_go"
+  packages = ["."]
+  revision = "7a984a84b5492ae539b79b62fb4a10afc63c7bcf"
+
+[[projects]]
   name = "github.com/caarlos0/env"
   packages = ["."]
   revision = "7cd7992b3bc86f920394f8de92c13900da1a46b7"
@@ -415,6 +421,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a89f7a96b2e21e65b2ae54d839b2f8cfb971b075f1a5f1aa8cedd34347142fa5"
+  inputs-digest = "afdf52559ab9d0608751c87adb1a100883f51468a94264d6416869723e149523"
   solver-name = "gps-cdcl"
   solver-version = 1
